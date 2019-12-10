@@ -10,10 +10,14 @@
 </head>
 
 <body>
-    <button class="sort btn" data-sort="name">
-               id <i class="fa fa-fw"></i>
-    </button>
-    <table id='data'>
+        <div id="search-results">
+    <button class="sort btn" data-sort="id">id</button>
+    <button class="sort btn" data-sort="name">name</button>
+    <button class="sort btn" data-sort="city">city</button>
+    <button class="sort btn" data-sort="income">income</button>
+    <button class="sort btn" data-sort="average">average</button>
+    <button class="sort btn" data-sort="lastMonth">lastMonth</button>
+    <table id='data' class='list'>
             <td>id</td>
             <td>name</td>
             <td>city</td>
@@ -21,6 +25,7 @@
             <td>average</td>
             <td>lastMonth</td>
     </table>
+</div>
     <br />
     <script>
 
