@@ -6,32 +6,24 @@
     <title>Gliwice </title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.1.0/list.min.js"></script>
+    <script src="myjs.js"></script>
     <link rel=stylesheet type=text/css href=mystyle.css />
 </head>
 
 <body>
-        <div id="search-results">
-    <button class="sort btn" data-sort="id">id</button>
-    <button class="sort btn" data-sort="name">name</button>
-    <button class="sort btn" data-sort="city">city</button>
-    <button class="sort btn" data-sort="income">income</button>
-    <button class="sort btn" data-sort="average">average</button>
-    <button class="sort btn" data-sort="lastMonth">lastMonth</button>
     <table id='data' class='list'>
-            <td>id</td>
-            <td>name</td>
-            <td>city</td>
-            <td>income</td>
-            <td>average</td>
-            <td>lastMonth</td>
+        <thead>
+                <th data-attr='id'>id</th>
+                <th data-attr='name'>name</th>
+                <th data-attr='city'>city</th>
+                <th data-attr='income'>income</th>
+                <th data-attr='average'>average</th>
+                <th data-attr='lastMonth'>lastMonth</th>
+        </thead>
+        <tbody id=results>
+
+        </tbody>
     </table>
-</div>
-    <br />
-    <script>
-
-
-    </script>
-    <script src="myjs.js"></script>
 </body>
 
 </html>
