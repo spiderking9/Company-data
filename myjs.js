@@ -1,20 +1,19 @@
 var d = parseFloat(new Date().getMonth() + 1);
 var companyDate = [];
-var dane = [];
-var output;
+var numberPage=0;
+var onOff=0;
 
 //fetch from json
 fetch('https://recruitment.hal.skygate.io/companies')
     .then(data => data.json()).then(resp => {
         resp.forEach(company => {
-            var id = company.id;
-            var name = company.name;
-            var city = company.city;
-            dane.push(id);
+            let id = company.id;
+            let name = company.name;
+            let city = company.city;
             fetch('https://recruitment.hal.skygate.io/incomes/' + id).then(data => data.json()).then(response => {
-                var income = Math.round(response.incomes.reduce((a, b) => a + parseFloat(b.value), 0) * 100) / 100;
-                var average = Math.round((income / 49) * 100) / 100;
-                var lastMonth = Math.round(response.incomes.map((id) => parseFloat(id.date.substring(5, 7)) === d ? id.value : 0).reduce((a, b) => {
+                let income = Math.round(response.incomes.reduce((a, b) => a + parseFloat(b.value), 0) * 100) / 100;
+                let average = Math.round((income / 49) * 100) / 100;
+                let lastMonth = Math.round(response.incomes.map((id) => parseFloat(id.date.substring(5, 7)) === d ? id.value : 0).reduce((a, b) => {
                     return a + parseFloat(b);
                 }, 0) * 100) / 100;
 
@@ -23,16 +22,16 @@ fetch('https://recruitment.hal.skygate.io/companies')
         });
     });
 
-var x=0;
 setTimeout(function () {
-        if(x===0) {startSend(); x=1;}
+        if(onOff===0) {startSend(); onOff=1;}
 }, 500);
 
+//sorting and paginate
 function startSend() {
     $(function() {
             $('#data th').on('click', function() {
-                var attr = $(this).attr('data-attr');
-                var asc = (!$(this).attr('data-asc'));
+                let attr = $(this).attr('data-attr');
+                let asc = (!$(this).attr('data-asc'));
                 
                 $('#data th').each(function() {
                     $(this).removeAttr('data-asc');
@@ -50,6 +49,7 @@ function startSend() {
 }
 
 function sortRes(prop, asc) {
+    numberPage=0;
     companyDate.sort(function(first, secend) {
         if (asc) {
             return (first[prop] > secend[prop]) ? 1 : ((first[prop] < secend[prop]) ? -1 : 0);
@@ -60,17 +60,53 @@ function sortRes(prop, asc) {
     sendRes();
 }
 
+
+//sending data to tabel
 function sendRes () {
-    var html = '';
-    for (var i=0;i<10;i++) {
+    let html = '';
+    for (var i=numberPage*10;i<((numberPage+1)*10);i++) {
+        var filteredData=objFilter(companyDate);
+        if(i===filteredData.length){ break;}
         html += '<tr>'
-            +'<td>'+companyDate[i].id+'</td>'
-            +'<td>'+companyDate[i].name+'</td>'
-            +'<td>'+companyDate[i].city+'</td>'
-            +'<td>'+companyDate[i].income+'</td>'
-            +'<td>'+companyDate[i].average+'</td>'
-            +'<td>'+companyDate[i].lastMonth+'</td>'
+            +'<td>'+filteredData[i].id+'</td>'
+            +'<td>'+filteredData[i].name+'</td>'
+            +'<td>'+filteredData[i].city+'</td>'
+            +'<td>'+filteredData[i].income+'</td>'
+            +'<td>'+filteredData[i].average+'</td>'
+            +'<td>'+filteredData[i].lastMonth+'</td>'
         +'</tr>';
     }
     $('#results').html(html);
+}
+
+//chosing page
+function prevPage(){
+    if(numberPage===0){ numberPage=0}
+    else { numberPage=numberPage-1; sendRes(); }
+}
+
+function nextPage(){
+    if((numberPage+1)===Math.ceil(objFilter(companyDate).length/10)||objFilter(companyDate).length===0){ }
+    else { numberPage=numberPage+1;     sendRes(); }
+
+}
+
+
+//filtering by input 
+function inputSearch(){
+    numberPage=0;
+    sendRes();
+}
+
+function objFilter(objToFiltr){
+    let idToCheck=new RegExp( document.getElementById("idInput").value,'g');
+    let nameToCheck=new RegExp( document.getElementById("nameInput").value,'g');
+    let cityToCheck=new RegExp( document.getElementById("cityInput").value,'g');
+    let incomeToCheck=new RegExp( document.getElementById("incomeInput").value,'g');
+    let averageToCheck=new RegExp( document.getElementById("averageInput").value,'g');
+    let lastMonthToCheck=new RegExp( document.getElementById("lastMonthInput").value,'g');
+
+    return objToFiltr.filter(x=> {
+        return idToCheck.test(x.id)&&cityToCheck.test(x.city)&&nameToCheck.test(x.name)&&incomeToCheck.test(x.income)&&averageToCheck.test(x.average)&&lastMonthToCheck.test(x.lastMonth);
+    });
 }

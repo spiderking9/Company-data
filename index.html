@@ -11,6 +11,12 @@
 </head>
 
 <body>
+        <input type="text" id="idInput" onkeyup="inputSearch();" placeholder="type id here">
+        <input type="text" id="nameInput" onkeyup="inputSearch()" placeholder="type name here">
+        <input type="text" id="cityInput" onkeyup="inputSearch()" placeholder="type city here">
+        <input type="text" id="incomeInput" onkeyup="inputSearch()" placeholder="type income here">
+        <input type="text" id="averageInput" onkeyup="inputSearch()" placeholder="type average here">
+        <input type="text" id="lastMonthInput" onkeyup="inputSearch()" placeholder="type lastMonth here">
     <table id='data' class='list'>
         <thead>
                 <th data-attr='id'>id</th>
@@ -24,6 +30,8 @@
 
         </tbody>
     </table>
+    <a href="javascript:prevPage()" id="btn_prev">Prev</a>
+    <a href="javascript:nextPage()" id="btn_next">Next</a>
 </body>
 
 </html>
