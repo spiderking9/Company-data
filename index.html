@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <title>Gliwice </title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.1.0/list.min.js"></script>
     <script src="myjs.js"></script>
@@ -11,27 +12,38 @@
 </head>
 
 <body>
-        <input type="text" id="idInput" onkeyup="inputSearch();" placeholder="type id here">
-        <input type="text" id="nameInput" onkeyup="inputSearch()" placeholder="type name here">
-        <input type="text" id="cityInput" onkeyup="inputSearch()" placeholder="type city here">
-        <input type="text" id="incomeInput" onkeyup="inputSearch()" placeholder="type income here">
-        <input type="text" id="averageInput" onkeyup="inputSearch()" placeholder="type average here">
-        <input type="text" id="lastMonthInput" onkeyup="inputSearch()" placeholder="type lastMonth here">
-    <table id='data' class='list'>
-        <thead>
-                <th data-attr='id'>id</th>
-                <th data-attr='name'>name</th>
-                <th data-attr='city'>city</th>
-                <th data-attr='income'>income</th>
-                <th data-attr='average'>average</th>
-                <th data-attr='lastMonth'>lastMonth</th>
-        </thead>
-        <tbody id=results>
 
-        </tbody>
-    </table>
-    <a href="javascript:prevPage()" id="btn_prev">Prev</a>
-    <a href="javascript:nextPage()" id="btn_next">Next</a>
+    <div class='wrapper'>
+        <table id='data' class='list'>
+            <div class='button'>
+                <a href="javascript:prevPage()" id="btn_prev">Prev</a>
+                <a href="javascript:nextPage()" id="btn_next">Next</a>
+            </div>
+            <div class='input'>
+                <input class="row" type="text" id="idInput" onkeyup="inputSearch();" placeholder="type id here">
+                <input class="row" type="text" id="nameInput" onkeyup="inputSearch()" placeholder="type name here">
+                <input class="row" type="text" id="cityInput" onkeyup="inputSearch()" placeholder="type city here">
+                <input class="row" type="text" id="incomeInput" onkeyup="inputSearch()" placeholder="type income here">
+                <input class="row" type="text" id="averageInput" onkeyup="inputSearch()"
+                    placeholder="type average here">
+                <input class="row" type="text" id="lastMonthInput" onkeyup="inputSearch()"
+                    placeholder="type lastMonth here">
+            </div>
+            <thead>
+                <tr class='row header'>
+                    <th data-attr='id' class='cell'>id</th>
+                    <th data-attr='name' class='cell'>name</th>
+                    <th data-attr='city' class='cell'>city</th>
+                    <th data-attr='income' class='cell'>income</th>
+                    <th data-attr='average' class='cell'>average</th>
+                    <th data-attr='lastMonth' class='cell'>lastMonth</th>
+                </tr>
+            </thead>
+            <tbody id=results>
+
+            </tbody>
+        </table>
+    </div>
 </body>
 
 </html>
